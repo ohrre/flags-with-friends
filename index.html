@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flags with Friends</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app-container">
+        <!-- Lobby Screen -->
+        <div id="lobby-screen" class="screen active">
+            <div class="lobby-card">
+                <h1>Flags with Friends</h1>
+                <p class="subtitle">Guess flags together with your partner in real time!</p>
+                
+                <div id="lobby-error" class="error-banner" style="display: none;"></div>
+
+                <div class="input-group">
+                    <label for="player-name">Your Nickname</label>
+                    <input type="text" id="player-name" placeholder="Enter your name..." maxlength="15" autocomplete="off">
+                </div>
+
+                <!-- Primary Action -->
+                <button id="create-room-btn" class="btn primary-btn">Create Room</button>
+
+                <div class="divider"><span>OR</span></div>
+
+                <!-- Simplified Join Workflow -->
+                <div class="join-section">
+                    <div class="join-inline-box">
+                        <input type="text" id="room-code-input" placeholder="Room Code" maxlength="6" autocomplete="off">
+                        <button id="join-room-btn" class="btn secondary-btn">Join</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Waiting Room Screen -->
+        <div id="waiting-screen" class="screen">
+            <div class="waiting-card">
+                <h2>Waiting Room</h2>
+                <p class="room-code-display">Room Code: <span id="display-room-code">------</span></p>
+                
+                <div id="waiting-error" class="error-banner" style="display: none;"></div>
+
+                <div class="players-container">
+                    <h3>Players Joined:</h3>
+                    <ul id="player-list"></ul>
+                </div>
+
+                <p id="waiting-message" class="subtitle" style="display: none;">Waiting for host to start the game...</p>
+                <button id="start-game-btn" class="btn primary-btn" style="display: none;">Start Game</button>
+            </div>
+        </div>
+
+        <!-- Main Game Screen -->
+        <div id="game-screen" class="screen">
+            <header class="game-header">
+                <div class="scores-display" id="current-score">Your: 0 pts // Partner: 0 pts</div>
+                <div class="timer-display" id="game-timer">00:00</div>
+            </header>
+
+            <main class="game-main-grid">
+                <!-- Left Panel: Partner's Flag to Describe -->
+                <div class="panel partner-panel">
+                    <h2 id="partner-header">Partner's Flag to Describe:</h2>
+                    <div class="flag-container">
+                        <img id="partner-flag-image" src="" alt="Partner's secret flag">
+                    </div>
+                    <p id="partner-country-name" class="country-reveal-text">Loading...</p>
+                    <button id="skip-partner-flag-btn" class="btn outline-btn">Skip Flag</button>
+                </div>
+
+                <!-- Right Panel: Your Guessing Area -->
+                <div class="panel guess-panel">
+                    <h2 id="guess-prompt">Guess your secret country based on your partner's clues.</h2>
+                    <div class="flag-container">
+                        <div id="mystery-placeholder" class="mystery-box">?</div>
+                        <img id="guessed-flag-image" src="" alt="Your guessed flag" style="display: none;">
+                    </div>
+                    
+                    <div class="guess-input-area">
+                        <input type="text" id="guess-input" placeholder="Type country guess..." autocomplete="off">
+                        <button id="submit-guess-btn" class="btn primary-btn">Guess</button>
+                    </div>
+                    <p id="feedback-msg" class="feedback-text"></p>
+                </div>
+            </main>
+
+            <!-- Bottom Section: Collected Flags & Game Control -->
+            <footer class="game-footer">
+                <div class="collection-info">
+                    <span>Collected Flags (<span id="collection-count">0</span>):</span>
+                    <div id="collected-flags-grid" class="flags-grid"></div>
+                </div>
+                <div class="game-actions">
+                    <button id="give-up-game-btn" class="btn danger-btn">Give Up</button>
+                </div>
+            </footer>
+        </div>
+
+        <!-- Game Over / Winner Modal -->
+        <div id="winner-modal" class="modal-overlay">
+            <div class="modal-card">
+                <h2 id="winner-announcement">🎉 Winner: Player</h2>
+                <div class="final-scoreboard-container">
+                    <h3>Final Scores</h3>
+                    <ul id="final-scoreboard"></ul>
+                </div>
+                <button id="restart-btn" class="btn primary-btn">Play Again</button>
+                <button id="exit-game-btn" class="btn secondary-btn" style="margin-top: 0.5rem;">Exit to Lobby</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
